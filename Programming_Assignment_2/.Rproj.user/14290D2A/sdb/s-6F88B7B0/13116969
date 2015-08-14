@@ -1,0 +1,17 @@
+{
+    "contents" : "###  Megan Graye\n###  080115\n###  Generate pollutant mean for a column of data from set of csv's\n\n\n\npollutantmean <- function(directory, pollutant, id = 1:332) {\n        ## 'directory' is a character vector of length 1 indicating\n        ## the location of the CSV files\n        filelist <- list.files(directory, full.names = TRUE)\n        \n        ## initialize dataframe for collecting observation contents\n        specdata <- data.frame()\n        for (i in id) {\n                ## Add observations for each of the elements of the vector id\n                specdata <-\n                        rbind(specdata, read.csv(filelist[i], sep = \",\"))\n        }\n        \n        ## Return the mean of the pollutant across all monitors list\n        ## in the 'id' vector (ignoring NA values)\n        \n        ## 'pollutant' is a character vector of length 1 indicating\n        ## the name of the pollutant for which we will calculate the\n        ## mean; either \"sulfate\" or \"nitrate\".\n        \n        RESULT <- mean(specdata[,pollutant], na.rm = TRUE)\n        \n        ## Keep it clean and maintain conventions.  If my function return is\n        ## always called result I can confidently assume that searching the\n        ## function for RESULT will allow me to backtrack when having to perform\n        ## debugging\n        RESULT\n}\n\n## Get the current working directory and save it in a variable for reversion\n## when complete\noldwd <- getwd()\nprint(oldwd)\n\n## Change the working directory to the parent of specdata\nsetwd(\".\"\n        ## Path to specdata parent directory \n)\n\n## define the value to use in the formal variable directory of the function:\n## pollutantmean ASSUMPTION:  Your working directory contains the specdata\n## directory as an immediate child\nmydir <- \"specdata\"\n\n## 'id' is an integer vector indicating the monitor ID numbers to be used\nid <- c(1:as.integer((length(list.files(\n        mydir\n)))))\n\n\n## 'pollutant' is a character vector of length 1 indicating the name of the\n## pollutant for which we will calculate the mean; either \"sulfate\" or\n## \"nitrate\".\nmypollutant <- \"sulfate\"\n\npollutantmean(\"specdata\", \"sulfate\", 1:10)\npollutantmean(\"specdata\", \"nitrate\", 70:72)\npollutantmean(\"specdata\", \"nitrate\", 23)\n\n# Execute function with populated formal variables\n## x <- pollutantmean(mydir, mypollutant, id)\n\n## str(x)\n\n# Resume R operation using the working directory in place before using this\n# script\nsetwd(oldwd)\n",
+    "created" : 1439535665041.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3579195599",
+    "id" : "13116969",
+    "lastKnownWriteTime" : 1439536102,
+    "path" : "~/GitHub/DataScience/Programming_Assignment_2/pollutantmean.R",
+    "project_path" : "pollutantmean.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "\noldwd <- getwd()\nprint(oldwd)\n\nsetwd(\".\"\n      ## Path to specdata parent directory \n)\n\n#id <- c(4,8,10,12,16,24,100)\ndirectory <-getwd()\n\ncomplete <- function(directory, id = 1:332) {\n\n                ## 'directory' is a character vector of length 1 indicating\n                ## the location of the CSV files\n                ## 'id' is an integer vector indicating the monitor ID numbers\n                ## to be used\n                ## Return a data frame of the form:\n                ## id nobs\n                ## 1 117\n                ## 2 1041\n                ## ...\n                ## where 'id' is the monitor ID number and 'nobs' is the\n                ## number of complete cases\n\n        filelist <- list.files(directory, full.names = TRUE)\n        \n        ## initialize dataframe for collecting observation contents\n        specdata <- data.frame()\n        dfidnobs <- data.frame()\n        for (i in id) {\n                ## Add observations for each of the elements of the vector id\n                specdata <- read.csv(filelist[i], sep = \",\")\n                a <- sum(complete.cases(na.omit(specdata)))\n                dfidnobs <- rbind(dfidnobs, list(id = i, nobs = a), make.row.names = FALSE)\n        }\n\n        RESULT <- dfidnobs\n        RESULT\n        \n}  \n\n\n\n## Get the current working directory and save it in a variable for reversion\n## when complete\noldwd <- getwd()\nprint(oldwd)\n\n## Change the working directory to the parent of specdata\nsetwd(\n        \"/home/megan/shared/owncloud/2 - R Programming/3 - Exercises/2 - Programming Assignments 1, 3, and swirl/Week 2/\"\n)\n\n\n## define the value to use in the formal variable directory of the function:\n## pollutantmean ASSUMPTION:  Your working directory contains the specdata\n## directory as an immediate child\nmydir <- \"specdata\"\n\n## 'id' is an integer vector indicating the monitor ID numbers to be used\nid <- c(1:as.integer((length(list.files(\n        mydir\n)))))\n\ncomplete(\"specdata\", 1)\ncomplete(\"specdata\", c(2, 4, 8, 10, 12))\ncomplete(\"specdata\", 30:25)\ncomplete(\"specdata\", 3)\n\n\n##complete <- complete(mydir, id)\n##str(complete)\n\n",
+    "created" : 1439535465544.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "528392590",
+    "id" : "D57AE97D",
+    "lastKnownWriteTime" : 1439536313,
+    "path" : "~/GitHub/DataScience/Programming_Assignment_2/complete.R",
+    "project_path" : "complete.R",
+    "properties" : {
+        "notebook_format" : "pdf_document"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

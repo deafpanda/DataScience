@@ -1,0 +1,17 @@
+{
+    "contents" : "source(\"complete.R\")\n        \ncorr <- function(directory, threshold = 0) {\n        ## 'directory' is a character vector of length 1 indicating\n        ## the location of the CSV files\n        cases <- complete(directory)\n        dfcorr <- cases[which(cases[, \"nobs\"] >= threshold),]\n        filelist <- list.files(directory, full.names = TRUE)\n        dfspecdata <- data.frame()\n        vcorr <- numeric()\n                for (i in dfcorr$id)\n                {\n                        dfspecdata <- read.csv(filelist[i], sep = \",\")\n                        vcorr <-\n                        c(vcorr, na.omit(cor(dfspecdata$sulfate, dfspecdata$nitrate, use = \"na.or.complete\")))\n                }\n                ## 'threshold' is a numeric vector of length 1 indicating the\n                ## number of completely observed observations (on all\n                ## variables) required to compute the correlation between\n                ## nitrate and sulfate; the default is 0\n                \n                ## Return a numeric vector of correlations\n                ## NOTE: Do not round the result!\n                RESULT <- vcorr\n\n        RESULT\n}\n\n## Get the current working directory and save it in a variable for reversion\n## when complete\noldwd <- getwd()\nprint(oldwd)\n\n## Change the working directory to the parent of specdata\nsetwd(\".\"\n      ## Path to specdata parent directory \n)\n\n## define the value to use in the formal variable directory of the function:\n## pollutantmean ASSUMPTION:  Your working directory contains the specdata\n## directory as an immediate child\nmydir <- \"specdata\"\n\n## 'id' is an integer vector indicating the monitor ID numbers to be used\nid <- c(1:as.integer((length(list.files(\n        mydir\n)))))\n\nth <- 5000\n\ncr <- corr(mydir)\nhead(cr)\nsummary(cr)\n\nlength(cr)\n        \n        ",
+    "created" : 1439535624689.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1209749422",
+    "id" : "6B68B734",
+    "lastKnownWriteTime" : 1439536116,
+    "path" : "~/GitHub/DataScience/Programming_Assignment_2/corr.R",
+    "project_path" : "corr.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : true,
+    "type" : "r_source"
+}
